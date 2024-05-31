@@ -16,7 +16,7 @@ spec:
         node-pool-group: subscribers
       containers:
         - name: mongo-cdc
-          image: asia-south1-docker.pkg.dev/blitzscale-prod-project/blitzscale-prod/mongo-cdc:latest
+          image: asia-south1-docker.pkg.dev/blitzscale-dev-project/blitzscale-dev/mongo-cdc:latest
           imagePullPolicy: Always
           resources:
             requests:
