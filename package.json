@@ -24,6 +24,7 @@
     "typescript": "~5.4.3"
   },
   "dependencies": {
+    "consola": "^3.2.3",
     "mongoose": "^8.4.0",
     "nconf": "^0.12.1"
   }
