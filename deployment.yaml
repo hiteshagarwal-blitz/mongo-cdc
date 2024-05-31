@@ -12,8 +12,6 @@ spec:
       labels:
         app: mongo-cdc
     spec:
-      nodeSelector:
-        node-pool-group: subscribers
       containers:
         - name: mongo-cdc
           image: asia-south1-docker.pkg.dev/blitzscale-dev-project/blitzscale-dev/mongo-cdc:latest
