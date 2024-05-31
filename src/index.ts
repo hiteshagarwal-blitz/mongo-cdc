@@ -15,13 +15,15 @@ const {host, port, db_name, replset} = mongodb;
 
     console.info('Mongo Status', connection.readyState);
 
-    let resumeAfter;
+    let resumeToken;
 
     console.log('Starting Mongo Watch.....');
 
-    const watchCursor = connection.watch([], {resumeAfter});
-    watchCursor.on('change', next => {
-      console.log(next, {depth: null});
+    const watchCursor = connection.watch([], {startAfter: resumeToken});
+    watchCursor.on('change', event => {
+      console.log(event, {depth: null});
+      resumeToken = event._id;
+      console.log('resumeToken>>', resumeToken);
     });
   } catch (err) {
     console.error('>>>Error>>>>\n', err);
