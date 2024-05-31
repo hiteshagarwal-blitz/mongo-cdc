@@ -1,0 +1,29 @@
+{
+  "name": "mongo-cdc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "build": "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/nconf": "^0.10.6",
+    "@types/node": "20.11.5",
+    "gts": "^5.3.0",
+    "typescript": "~5.4.3"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.0",
+    "nconf": "^0.12.1"
+  }
+}
