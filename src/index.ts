@@ -29,16 +29,17 @@ const {host, port, db_name, replset} = mongodb;
     process.on('SIGINT', () => {
       console.error('SIGINT signal received');
       console.info('Closing Mongo Watch!!');
-      watchCursor.close();
+      watchCursor.close().then(() => {
+        throw new Error('SIGINT signal received');
+      });
     });
 
     process.on('SIGTERM', () => {
-      console.error('SIGINT signal received');
       console.info('Closing Mongo Watch!!');
-      watchCursor.close();
+      watchCursor.close().then(() => {
+        throw new Error('SIGTERM signal received');
+      });
     });
-
-    // watchCursor.on('error')
   } catch (err) {
     console.error('>>>Error>>>>\n', err);
   }
