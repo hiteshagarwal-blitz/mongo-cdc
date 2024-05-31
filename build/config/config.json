@@ -1,7 +1,0 @@
-{
-    "mongodb": {
-        "host": "",
-        "port": "",
-        "replset": ""
-    }
-}
