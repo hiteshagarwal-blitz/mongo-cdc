@@ -22,7 +22,7 @@ const {host, port, db_name, replset} = mongodb;
 
     const watchCursor = connection.watch([], {resumeAfter});
     watchCursor.on('change', next => {
-      consola.log(next);
+      consola.info(next, {depth: null});
     });
   } catch (err) {
     consola.error('>>>Error>>>>\n', err);
