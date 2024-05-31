@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-cdc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-cdc
+  template:
+    metadata:
+      labels:
+        app: mongo-cdc
+    spec:
+      nodeSelector:
+        node-pool-group: subscribers
+      containers:
+        - name: mongo-cdc
+          image: asia-south1-docker.pkg.dev/blitzscale-prod-project/blitzscale-prod/mongo-cdc:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "100m"
+            limits:
+              memory: "300Mi"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+      terminationGracePeriodSeconds: 5

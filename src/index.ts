@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import consola from 'consola';
 
 import {mongodb} from './config';
 
@@ -14,17 +13,17 @@ const {host, port, db_name, replset} = mongodb;
       })
       .asPromise();
 
-    consola.info('Mongo Status', connection.readyState);
+    console.info('Mongo Status', connection.readyState);
 
     let resumeAfter;
 
-    consola.log('Starting Mongo Watch.....');
+    console.log('Starting Mongo Watch.....');
 
     const watchCursor = connection.watch([], {resumeAfter});
     watchCursor.on('change', next => {
-      consola.info(next, {depth: null});
+      console.log(next, {depth: null});
     });
   } catch (err) {
-    consola.error('>>>Error>>>>\n', err);
+    console.error('>>>Error>>>>\n', err);
   }
 })();
