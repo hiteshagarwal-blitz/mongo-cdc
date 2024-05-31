@@ -28,7 +28,7 @@ const {host, port, db_name, replset} = mongodb;
       },
     ];
 
-    const watchCursor = connection.watch([pipeline], {startAfter: resumeToken});
+    const watchCursor = connection.watch(pipeline, {startAfter: resumeToken});
     watchCursor.on('change', event => {
       console.log(event, {depth: null});
       resumeToken = event._id;
