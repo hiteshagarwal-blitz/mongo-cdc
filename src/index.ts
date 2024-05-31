@@ -25,6 +25,20 @@ const {host, port, db_name, replset} = mongodb;
       resumeToken = event._id;
       console.log('resumeToken>>', resumeToken);
     });
+
+    process.on('SIGINT', () => {
+      console.error('SIGINT signal received');
+      console.info('Closing Mongo Watch!!');
+      watchCursor.close();
+    });
+
+    process.on('SIGTERM', () => {
+      console.error('SIGINT signal received');
+      console.info('Closing Mongo Watch!!');
+      watchCursor.close();
+    });
+
+    // watchCursor.on('error')
   } catch (err) {
     console.error('>>>Error>>>>\n', err);
   }
