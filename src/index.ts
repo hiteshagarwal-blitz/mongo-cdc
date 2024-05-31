@@ -19,7 +19,11 @@ const {host, port, db_name, replset} = mongodb;
 
     console.log('Starting Mongo Watch.....');
 
-    const watchCursor = connection.watch([], {startAfter: resumeToken});
+    const pipeline = {
+      $match: ['insert', 'update'],
+    };
+
+    const watchCursor = connection.watch([pipeline], {startAfter: resumeToken});
     watchCursor.on('change', event => {
       console.log(event, {depth: null});
       resumeToken = event._id;
