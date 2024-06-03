@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "mongoose": "^8.4.0",
-    "nconf": "^0.12.1"
+    "nconf": "^0.12.1",
+    "node-fetch": "^3.3.2",
+    "sarthi": "git+ssh://git@sarthi_github:Blitzscale-19/sarthi.git#v2.9.9"
   }
 }

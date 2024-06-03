@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 import {mongodb} from './config';
 
+import {slackAtAirflowTest} from './utils/slack';
+import publishMonogCdcData from './publisher/dataPublisher';
+
 const {host, port, db_name, replset} = mongodb;
 
 type RequiredChangeStreanType =
@@ -48,6 +51,7 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
   }
 
   console.log('CDC Event Data:\n', formattedChangeEvent);
+  publishMonogCdcData(formattedChangeEvent);
 };
 
 (async () => {
@@ -77,18 +81,20 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
     });
 
     process.on('SIGINT', () => {
-      console.error('SIGINT signal received');
       console.info('Closing Mongo Watch!!');
       watchCursor.close();
+      slackAtAirflowTest('SIGINT signal received');
       throw new Error('SIGINT signal received');
     });
 
     process.on('SIGTERM', () => {
       console.info('Closing Mongo Watch!!');
       watchCursor.close();
+      slackAtAirflowTest('SIGTERM signal received');
       throw new Error('SIGTERM signal received');
     });
   } catch (err) {
+    slackAtAirflowTest(JSON.stringify(err));
     console.error('>>>Error>>>>\n', err);
   }
 })();
