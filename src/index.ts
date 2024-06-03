@@ -82,22 +82,22 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
       cdcParser(event);
     });
 
-    process.on('SIGINT', () => {
+    process.on('SIGINT', async () => {
       console.info('Closing Mongo Watch!!');
       watchCursor && watchCursor.close();
-      slackAtAirflowTest('SIGINT signal received');
+      await slackAtAirflowTest('Mongo CDC:: SIGINT signal received');
       throw new Error('SIGINT signal received');
     });
 
-    process.on('SIGTERM', () => {
+    process.on('SIGTERM', async () => {
       console.info('Closing Mongo Watch!!');
       watchCursor && watchCursor.close();
-      slackAtAirflowTest('SIGTERM signal received');
+      await slackAtAirflowTest('Mongo CDC:: SIGTERM signal received');
       throw new Error('SIGTERM signal received');
     });
   } catch (err) {
-    slackAtAirflowTest(JSON.stringify(err));
+    await slackAtAirflowTest(JSON.stringify(err));
     watchCursor && watchCursor.close();
-    console.error('>>>Error>>>>\n', err);
+    console.error('Mongo CDC:: >>>Error>>>>\n', err);
   }
 })();

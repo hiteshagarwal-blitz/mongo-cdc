@@ -20,7 +20,7 @@ const sendMessage = (channel: string, message: string) => {
   });
 };
 
-const slackAtAirflowTest = (message: string) => {
+const slackAtAirflowTest = async (message: string) => {
   return sendMessage('airflow-test', message);
 };
 
