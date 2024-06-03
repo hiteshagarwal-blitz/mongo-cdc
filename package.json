@@ -24,9 +24,9 @@
     "typescript": "~5.4.3"
   },
   "dependencies": {
+    "@google-cloud/pubsub": "^4.4.1",
     "mongoose": "^8.4.0",
     "nconf": "^0.12.1",
-    "node-fetch": "^3.3.2",
-    "sarthi": "git+ssh://git@sarthi_github:Blitzscale-19/sarthi.git#v2.9.9"
+    "node-fetch": "^3.3.2"
   }
 }

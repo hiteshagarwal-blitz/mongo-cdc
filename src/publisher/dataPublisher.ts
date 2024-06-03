@@ -1,15 +1,12 @@
 import {publishers} from '../config';
-import sarthi from '../utils/sarthi';
+import {PubSub} from '@google-cloud/pubsub';
 
-const {QueueService} = sarthi.common.services.queue;
-
-const queueService = new QueueService({
-  ...publishers.config,
-  ...publishers.mongo_cdc_queue,
-});
+const pubSubClient = new PubSub({ projectId: publishers.config.projectId, credentials: publishers.config });
 
 const publishMonogCdcData = (data: object) => {
-  queueService.publishMessage(data);
+  pubSubClient.topic(publishers.mongo_cdc_queue.topicName).publishMessage({data: Buffer.from(JSON.stringify(data))}).catch(err => {
+    throw err;
+  })
 };
 
 export default publishMonogCdcData;
