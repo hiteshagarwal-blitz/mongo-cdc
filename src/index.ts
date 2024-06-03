@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import {mongodb} from './config';
 
-import {slackAtAirflowTest} from './utils/slack';
+import slackAtAirflowTest from './utils/slack';
 import publishMonogCdcData from './publisher/dataPublisher';
 
 const {host, port, db_name, replset} = mongodb;

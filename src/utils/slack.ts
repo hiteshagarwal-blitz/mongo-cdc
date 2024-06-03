@@ -24,4 +24,4 @@ const slackAtAirflowTest = (message: string) => {
   return sendMessage('airflow-test', message);
 };
 
-export {slackAtAirflowTest};
+export default slackAtAirflowTest;
