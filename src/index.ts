@@ -55,6 +55,8 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
 };
 
 (async () => {
+  let watchCursor: mongoose.mongo.ChangeStream | null = null;
+
   try {
     const connection = await mongoose
       .createConnection(`mongodb://${host}:${port}/${db_name}`, {
@@ -75,26 +77,27 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
       },
     ];
 
-    const watchCursor = connection.watch(pipeline, {startAfter: resumeToken});
+    watchCursor = connection.watch(pipeline, {startAfter: resumeToken});
     watchCursor.on('change', (event: RequiredChangeStreanType) => {
       cdcParser(event);
     });
 
     process.on('SIGINT', () => {
       console.info('Closing Mongo Watch!!');
-      watchCursor.close();
+      watchCursor && watchCursor.close();
       slackAtAirflowTest('SIGINT signal received');
       throw new Error('SIGINT signal received');
     });
 
     process.on('SIGTERM', () => {
       console.info('Closing Mongo Watch!!');
-      watchCursor.close();
+      watchCursor && watchCursor.close();
       slackAtAirflowTest('SIGTERM signal received');
       throw new Error('SIGTERM signal received');
     });
   } catch (err) {
     slackAtAirflowTest(JSON.stringify(err));
+    watchCursor && watchCursor.close();
     console.error('>>>Error>>>>\n', err);
   }
 })();
