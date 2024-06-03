@@ -50,7 +50,7 @@ const cdcParser = (changeEvent: RequiredChangeStreanType) => {
       break;
   }
 
-  console.log('CDC Event Data:\n', formattedChangeEvent);
+  // console.log('CDC Event Data:\n', formattedChangeEvent);
   publishMonogCdcData(formattedChangeEvent);
 };
 

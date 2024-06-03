@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^4.4.1",
-    "@types/node-fetch": "^2.6.1",
+    "@types/node-fetch": "^2.6.0",
     "mongoose": "^8.4.0",
     "nconf": "^0.12.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.0"
   }
 }

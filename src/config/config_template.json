@@ -2,6 +2,7 @@
   "mongodb": {
     "host": "",
     "port": "",
+    "db_name": "",
     "replset": ""
   },
   "slack_access_token": "",
